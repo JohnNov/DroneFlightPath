@@ -1,0 +1,34 @@
+toPing is ping -c 1 192.168.0.200
+commandResult is PING 192.168.0.200 (192.168.0.200) 56(84) bytes of data.
+
+--- 192.168.0.200 ping statistics ---
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
+
+
+result is -1
+goodHosts is 1
+badHosts is 0
+All drones are connected to network!
+
+
+
+toPing is ping -c 1 192.168.0.200te
+commandResult is ping: unknown host 192.168.0.200te
+
+result is -1
+goodHosts is 1
+badHosts is 0
+All drones are connected to network!
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+When teresa returns, plug pi back into network and run program.  
+Check what the program confirmation message is.  Then do this:
+        int result = !commandResult.find("Whatever the positive message is");
+Note the ! operator 
+
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmQV978w_vTs3-THAe7OHUxOhgx45ErdE&callback=initMap"
+
+
+

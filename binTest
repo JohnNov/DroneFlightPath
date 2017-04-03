@@ -1,0 +1,4 @@
+#!/bin/bash
+php -f fetchGPS.php
+cat GPS_Information.txt
+$SHELL

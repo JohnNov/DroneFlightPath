@@ -1,0 +1,60 @@
+# depslib dependency file v1.0
+1490991617 source:/home/john/Documents/ProgrammingProjects/Simulation/main.cpp
+	<iostream>
+	<sstream>
+	"AssignCoordinates.h"
+	"FlightTime.h"
+	<string>
+	<SFML/Graphics.hpp>
+	<TGUI/TGUI.hpp>
+	"Drone.h"
+	<vector>
+	<fstream>
+	<unistd.h>
+
+1481300442 /home/john/Documents/ProgrammingProjects/Simulation/include/AssignCoordinates.h
+	<list>
+
+1488315429 /home/john/Documents/ProgrammingProjects/Simulation/include/FlightTime.h
+	<Drone.h>
+
+1481310444 source:/home/john/Documents/ProgrammingProjects/Simulation/src/AssignCoordinates.cpp
+	<iostream>
+	<string>
+	"AssignCoordinates.h"
+	<cstdio>
+	<stdio.h>
+	<time.h>
+	<Drone.h>
+	<math.h>
+
+1490922509 /home/john/Documents/ProgrammingProjects/Simulation/include/Drone.h
+	<tuple>
+	<math.h>
+
+1490922384 source:/home/john/Documents/ProgrammingProjects/Simulation/src/Drone.cpp
+	<iostream>
+	<string>
+	"Drone.h"
+	<vector>
+	<numeric>
+	<cmath>
+	<fstream>
+
+1490993311 source:/home/john/Documents/ProgrammingProjects/Simulation/src/FlightTime.cpp
+	"FlightTime.h"
+	<iostream>
+	<string>
+	<fstream>
+	<unistd.h>
+	<Drone.h>
+	<numeric>
+	<cmath>
+
+1479502953 source:/home/john/Documents/ProgrammingProjects/Simulation/src/HelloWorld.cpp
+	<SFGUI/SFGUI.hpp>
+	<SFGUI/Widgets.hpp>
+	<SFML/Graphics.hpp>
+
+1479502849 /home/john/Documents/ProgrammingProjects/Simulation/include/HelloWorld.h
+
