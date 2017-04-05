@@ -46,7 +46,7 @@ Drone::Drone(double bottomLeftLat, double bottomLeftLong, double bottomRightLat,
     assignCoordinates();
 
 }
-
+///This tells the drones exactly what it's partitioned area will be.
 void Drone::assignCoordinates()
 {
     bool isOver = false;
@@ -61,6 +61,8 @@ void Drone::assignCoordinates()
     findCenter(_topLeftLong, _topRightLong, _bottomLeftLong, _topLeftLat);
     }
 
+
+///Responsible for assigning the drones starting point.
 void Drone::setStartingPoint(double startingLat, double startingLong)
 {
     _startingLat = startingLat;
@@ -70,12 +72,12 @@ void Drone::setStartingPoint(double startingLat, double startingLong)
     _currentLong = _startingLong;
 }
 
-void Drone::goRight()   //We should start storing the new coordinates that we'll take the average of and send them to setLimit
+void Drone::goRight()   ///We should start storing the new coordinates that we'll take the average of and send them to setLimit
 {
 
-    while((_currentLong+.0001)<=_rightLimit)    //.0001 is the next space that the drone will move to
+    while((_currentLong+.0001)<=_rightLimit)    ///.0001 is the next space that the drone will move to
     {
-        _currentLong = _currentLong + .0001;    //.0001 should really be a random number
+        _currentLong = _currentLong + .0001;    ///.0001 (We could change to a random number to account for noise such as wind
         cout<<_currentLat<<","<<_currentLong<<endl;
     }
 
@@ -100,8 +102,8 @@ void Drone::goUp()
 
     while((_currentLat+.0001)<=_topLimit)
     {
-        //We'd also have to fetch the current Long when this is hooked up to GPS for accurate new Right Limit.
-        //So we'd update current Long by whatever the GPS says now.
+        ///We'd also have to fetch the current Long when this is hooked up to GPS for accurate new Right Limit.
+        ///So we'd update current Long by whatever the GPS says now.
         longsForNewRightLimit.push_back(_currentLong);
         _currentLat = _currentLat + .0001;
         cout<<_currentLat<<","<<_currentLong<<endl;
@@ -219,17 +221,16 @@ void Drone::goDown()
     }
 
 }
-
+///Set's every individual drones limits on their partitioned area.
 void Drone::setHorizontalLimits(double theLeftLimit, double theRightLimit)
 {
     _rightLimit = theRightLimit;
     _leftLimit = theLeftLimit;
 
 }
-
+///Acts as a boolean flag if we're out of room.
 bool Drone::outOfRoom()
 {
-
     return noRoomLeft;
 
 }
@@ -248,7 +249,7 @@ void Drone::findCenter(double bottomLeftLong, double bottomRightLong, double bot
     _centerLong = bottomLeftLong+ToAddFromLeft;
 
 }
-
+///Set's every individual drones limits on their partitioned area.
 void Drone::setVerticalLimits(double topLimit, double bottomLimit)
 {
 
@@ -289,7 +290,7 @@ void Drone::setLocation(int x, int y)
     _y = y;
 }
 
-void Drone::getLocation(int &x, int &y)     //We use reference for multiple parameters
+void Drone::getLocation(int &x, int &y)     ///We use reference to change multiple arguments without returning them
 {
     x = _x;
     y = _y;
@@ -303,10 +304,9 @@ int Drone::numTimesSpiralCenter(){ ///Tells drones to fly up, down, left and rig
     int spiralCount = 0;
     while(difference>0)
     {
-        difference = difference-.0004;
+        difference = difference-.0004;          ///0.0004 calculated value for reasonable drone travel increment
         spiralCount++;
     }
-
     cout<<"spiralCount is "<<spiralCount<<endl;
 
     return spiralCount;
@@ -314,7 +314,6 @@ int Drone::numTimesSpiralCenter(){ ///Tells drones to fly up, down, left and rig
     }
 void Drone::setSpirals(int numSpirals){
     _numberOfSpirals = numSpirals;
-
 }
 
 int Drone::getSpirals(){
@@ -323,9 +322,8 @@ int Drone::getSpirals(){
 
 void Drone::beginFlight(int numSpirals){
 
-    for(int i = 0; i<numSpirals; i++)    //THis is a hardcoded for loop to find the center
+    for(int i = 0; i<numSpirals; i++)    ///numSpirals until we reach the center.
     {
-
         goRight();
         goUp();
         goLeft();

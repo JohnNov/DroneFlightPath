@@ -10,7 +10,7 @@
 #include <fstream>
 #include <unistd.h>
 
-
+///Responsible for fetching result from terminal after we submit a terminal command
 string GetStdoutFromCommand(string cmd) {
 
     string data;
@@ -28,7 +28,9 @@ string GetStdoutFromCommand(string cmd) {
     return data;
     }
 
-
+///Returns the number of drones that responded to ping
+///We refer to the drones by their IP numbers in staticIPList.txt
+///For now we only have 1 IP number
 int numDrones(vector<string> &goodHostsIPs){
     int goodHosts = 0;
     int badHosts = 0;
@@ -78,17 +80,19 @@ int numDrones(vector<string> &goodHostsIPs){
         return goodHosts;
 }
 
+///We push however many drones onto our drone vector as we need to
 void pushDronesOnVector(int numOfDrones, vector<Drone> &v){     ///Pushes x number of drones onto the drone Vector
 
     if(numOfDrones > 0){
         Drone aDrone;
         v.push_back(aDrone);
         numOfDrones--;
-        ///cout<<"numOfDrones is "<<numOfDrones<<endl;
         pushDronesOnVector(numOfDrones, v);
 }
 }
 
+///When google map javascript program is finished this function will be unnecessary and outdated.
+///Until then it is responsible for user input of GPS coordinates of area we want to search.
 void areaToBeSearched(double &topLeftLat, double &topLeftLong, double &bottomRightLat, double &bottomRightLong){        ///Prompts user for the area that has to be searched
 
         double userInput;
@@ -124,6 +128,8 @@ void areaToBeSearched(double &topLeftLat, double &topLeftLong, double &bottomRig
                     bottomRightLong = userInput;
     }
 }
+///We divide this area up into rectangular strips based on however many drones we have at our disposal.
+///1 rectange per drone
 
 void partitionArea(vector<Drone> &v, vector<string> IPList, int numberOfDrones, double topLeftLat, double topLeftLong, double bottomRightLat, double bottomRightLong){
 
@@ -145,13 +151,7 @@ void partitionArea(vector<Drone> &v, vector<string> IPList, int numberOfDrones, 
 
         Drone aDrone(droneBottomLeftLat, droneBottomLeftLong, droneBottomRightLat, droneBottomRightLong, droneTopLeftLat, droneTopLeftLong, droneTopRightLat, droneTopRightLong);
 
-        ///cout<<"topLeft is "<<droneTopLeftLat<<","<<droneTopLeftLong<<endl;
-        ///cout<<"topRight is "<<droneTopRightLat<<","<<droneTopRightLong<<endl;
-
         cout<<endl;
-
-        ///cout<<"bottomLeft is "<<droneBottomLeftLat<<","<<droneBottomLeftLong<<endl;
-        ///cout<<"bottomRight is "<<droneBottomRightLat<<","<<droneBottomRightLong<<endl;
 
         aDrone.setIPNumber(IPList[i]);      ///We tell the drone object the IPNumber of a hardware drone
         v.push_back(aDrone);
@@ -160,25 +160,8 @@ void partitionArea(vector<Drone> &v, vector<string> IPList, int numberOfDrones, 
 
 }
 
-void assignCoordinates(string printMessage, double &aValue){
-    string input;
-    cout<<"Please enter "<<printMessage<<endl;
-
-    double aNumber = 0;
-
-    while(true){
-        getline(cin, input);
-        stringstream aStream(input);
-        if(aStream>>aNumber)
-            break;
-        cout << "Invalid number, please try again."<<endl;
-    }
-    aValue = aNumber;
-}
-
 int main()
 {
-
     double topLeftLat, topLeftLong, bottomRightLat, bottomRightLong;
     topLeftLat = 41.48698;
     topLeftLong = -71.527993;
@@ -199,7 +182,6 @@ int main()
     for(int i = 0; i<droneVector.size(); i++){
         numSpirals = droneVector[i].numTimesSpiralCenter();
         droneVector[i].setSpirals(numSpirals);
-        ///cout<<"numSpirals is "<<numSpirals<<endl;
         droneVector[i].IPNumAndInstructionsToApache();
         droneVector[i].beginFlight(numSpirals);
     }
